@@ -12,6 +12,7 @@ import {
   arrayRemove,
   Timestamp,
 } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import styles from "./client-gallery.module.css";
 import BackButton from "@/components/BackButton";
 
@@ -55,17 +56,17 @@ export default function ClientGalleryPage({ eventId }: Props) {
         }
 
         const data = eventDoc.data();
-        const currentUser = (await import("firebase/auth")).getAuth().currentUser;
+        const currentUser = getAuth().currentUser;
 
         if (!currentUser || (data.clientEmail !== currentUser.email && data.photographerId !== currentUser.uid)) {
           setLoadingEvent(false);
           return;
         }
 
-        const eventInfo = {
+        const eventInfo: Event = {
           id: eventDoc.id,
           name: data.name || "Galeria",
-          maxSelections: data.maxSelections || 0,
+          maxSelections: data.maxSelections ?? 0, // ← nullish coalescing para garantir número
           totalPhotos: data.totalPhotos || 0,
           selectionsSubmitted: !!data.selectionsSubmitted,
         };
@@ -102,7 +103,7 @@ export default function ClientGalleryPage({ eventId }: Props) {
           };
         });
 
-        // Ordenação numérica pelo nome do arquivo
+        // Ordenação numérica
         photoList.sort((a, b) =>
           a.name.localeCompare(b.name, undefined, { numeric: true })
         );
@@ -125,13 +126,13 @@ export default function ClientGalleryPage({ eventId }: Props) {
             selected: selectedIds.includes(photo.id),
           }));
         } else {
-          const currentUser = (await import("firebase/auth")).getAuth().currentUser;
+          const currentUser = getAuth().currentUser;
           photoList = photoList.map((photo) => {
             const d = snapshot.docs.find((d) => d.id === photo.id)?.data();
             return {
               ...photo,
               selected: Array.isArray(d?.selectedBy)
-                ? d.selectedBy.includes(currentUser?.email)
+                ? d.selectedBy.includes(currentUser?.email ?? "")
                 : false,
             };
           });
@@ -148,8 +149,9 @@ export default function ClientGalleryPage({ eventId }: Props) {
 
   const selectedCount = photos.filter((p) => p.selected).length;
 
+  // ← CORREÇÃO PRINCIPAL AQUI
   useEffect(() => {
-    if (event?.maxSelections > 0 && selectedCount === event.maxSelections) {
+    if (event && event.maxSelections > 0 && selectedCount === event.maxSelections) {
       setExactLimitReached(true);
     } else {
       setExactLimitReached(false);
@@ -164,7 +166,7 @@ export default function ClientGalleryPage({ eventId }: Props) {
       return;
     }
 
-    const currentUser = (await import("firebase/auth")).getAuth().currentUser;
+    const currentUser = getAuth().currentUser;
     if (!currentUser) return;
 
     const photoRef = doc(db, `events/${eventId}/photos`, photoId);
@@ -188,10 +190,16 @@ export default function ClientGalleryPage({ eventId }: Props) {
   };
 
   const submitSelections = async () => {
-    if (!event || !exactLimitReached || selectionsSubmitted || sending) return;
+    if (
+      !event ||
+      !exactLimitReached ||
+      selectionsSubmitted ||
+      sending ||
+      event.maxSelections <= 0
+    ) return;
 
     const selectedPhotoIds = photos.filter((p) => p.selected).map((p) => p.id);
-    const currentUser = (await import("firebase/auth")).getAuth().currentUser;
+    const currentUser = getAuth().currentUser;
 
     setSending(true);
 
