@@ -28,21 +28,23 @@ export default function EventDetailsPageClient() {
 
     async function fetchEvent() {
       try {
+        // Busca o documento do evento
         const eventRef = doc(db, "events", eventId);
         const eventSnap = await getDoc(eventRef);
 
         if (!eventSnap.exists()) {
           setEvent(null);
+          setLoading(false);
           return;
         }
 
         const data = eventSnap.data();
 
-        // Contagem de fotos enviadas
-        const photosRef = collection(db, "events", eventId, "photos");
+        // Busca a subcoleção photos CORRETAMENTE
+        const photosRef = collection(eventRef, "photos"); // ← CORREÇÃO AQUI
         const photosSnap = await getDocs(photosRef);
 
-        // Formatação curta do prazo: "15 jan 2026"
+        // Formatação da data de entrega
         let formattedDeliveryDate = "Não informado";
         if (data.deliveryDate) {
           let date: Date;
@@ -63,7 +65,7 @@ export default function EventDetailsPageClient() {
 
         setEvent({
           name: data.name || "Evento sem nome",
-          client: data.client || "Cliente não informado",
+          client: data.clientEmail || data.client || "Cliente não informado",
           maxSelections: data.maxSelections || 0,
           uploadedPhotos: photosSnap.size,
           deliveryDate: formattedDeliveryDate,
