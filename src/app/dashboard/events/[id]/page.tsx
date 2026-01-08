@@ -29,7 +29,7 @@ export default function EventDetailsPageClient() {
     async function fetchEvent() {
       try {
         // Forma oficial do Firebase modular v9+
-        const eventRef = doc(db, "events", eventId);
+        const eventRef = doc(db, "events", eventId as string);
         const eventSnap = await getDoc(eventRef);
 
         if (!eventSnap.exists()) {
@@ -41,7 +41,7 @@ export default function EventDetailsPageClient() {
         const data = eventSnap.data();
 
         // Subcoleção photos — forma oficial
-        const photosRef = collection(db, "events", eventId, "photos");
+        const photosRef = collection(db, "events", eventId as string, "photos");
         const photosSnap = await getDocs(photosRef);
 
         // Formatação da data
