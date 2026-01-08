@@ -28,7 +28,7 @@ export default function EventDetailsPageClient() {
 
     async function fetchEvent() {
       try {
-        // Busca o documento do evento
+        // Forma correta e segura no Firebase modular
         const eventRef = doc(db, "events", eventId);
         const eventSnap = await getDoc(eventRef);
 
@@ -40,21 +40,16 @@ export default function EventDetailsPageClient() {
 
         const data = eventSnap.data();
 
-        // Busca a subcoleção photos CORRETAMENTE
-        const photosRef = collection(eventRef, "photos"); // ← CORREÇÃO AQUI
+        // Subcoleção photos — forma correta
+        const photosRef = collection(db, "events", eventId, "photos");
         const photosSnap = await getDocs(photosRef);
 
-        // Formatação da data de entrega
+        // Formatação da data
         let formattedDeliveryDate = "Não informado";
         if (data.deliveryDate) {
-          let date: Date;
-          if (data.deliveryDate instanceof Timestamp) {
-            date = data.deliveryDate.toDate();
-          } else if (typeof data.deliveryDate === "string") {
-            date = new Date(data.deliveryDate);
-          } else {
-            date = new Date();
-          }
+          const date = data.deliveryDate instanceof Timestamp
+            ? data.deliveryDate.toDate()
+            : new Date(data.deliveryDate);
 
           formattedDeliveryDate = date.toLocaleDateString("pt-BR", {
             day: "numeric",
