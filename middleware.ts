@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initializeApp, getApps, cert } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore, Firestore } from "firebase-admin/firestore";
 
 // === CREDENCIAIS DO FIREBASE ADMIN (para server-side) ===
 const serviceAccount = {
@@ -10,7 +10,7 @@ const serviceAccount = {
 };
 
 // Inicializa o Firebase Admin apenas se as credenciais existirem
-let db;
+let db: Firestore | null;
 
 try {
   if (!getApps().length && serviceAccount.projectId && serviceAccount.clientEmail && serviceAccount.privateKey) {
