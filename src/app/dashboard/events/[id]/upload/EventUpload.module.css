@@ -1,0 +1,259 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  position: relative; /* Necessário para o posicionamento absoluto do BackButton */
+}
+
+/* Wrapper para o BackButton — fixo no topo esquerdo */
+.backButtonWrapper {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 10;
+}
+
+/* Conteúdo centralizado */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  padding: 48px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.status {
+  font-size: 1.2rem;
+  color: #34d399;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Upload area */
+.uploadArea {
+  text-align: center;
+}
+
+.uploadBox {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 2px dashed rgba(167, 139, 250, 0.5);
+  border-radius: 28px;
+  padding: 80px 40px;
+  margin-bottom: 50px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.uploadBox:hover {
+  border-color: #a78bfa;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  color: #ffffff;
+}
+
+.uploadIcon {
+  font-size: 5rem;
+  opacity: 0.9;
+}
+
+.uploadLabel span:nth-child(2) {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.uploadHint {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Progresso */
+.progressContainer {
+  margin: 60px 0;
+}
+
+.progressBar {
+  width: 100%;
+  max-width: 700px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 0 auto 24px auto;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #a78bfa, #7c3aed);
+  border-radius: 50px;
+  width: 0%;
+  transition: width 0.6s ease;
+}
+
+.progressText {
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.tip {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 0.9; transform: translateY(0); }
+}
+
+/* Botão de upload */
+.uploadButton {
+  padding: 20px 80px;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 15px 40px rgba(124, 58, 237, 0.5);
+  transition: all 0.4s ease;
+}
+
+.uploadButton:hover:not(:disabled) {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(124, 58, 237, 0.6);
+}
+
+.uploadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Preview */
+.previewSection {
+  margin-top: 60px;
+}
+
+.sectionTitle {
+  font-size: 2.2rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 32px;
+}
+
+.photoCard {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transition: transform 0.5s ease;
+}
+
+.photoCard:hover {
+  transform: translateY(-16px);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoNumber {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  backdrop-filter: blur(8px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .backButtonWrapper {
+    top: 20px;
+    left: 20px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .card {
+    padding: 32px;
+  }
+
+  .title {
+    font-size: 2.4rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+  }
+
+  .uploadButton {
+    padding: 18px 50px;
+    font-size: 1.4rem;
+  }
+}

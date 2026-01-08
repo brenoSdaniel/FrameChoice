@@ -1,0 +1,91 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Usuários — só o próprio
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Eventos principais
+    match /events/{eventId} {
+      // Criação: só o fotógrafo
+      allow create: if request.auth != null && 
+                    request.resource.data.photographerId == request.auth.uid;
+
+      // Leitura: fotógrafo OU cliente (pelo email)
+      allow read: if request.auth != null && 
+                  (resource.data.photographerId == request.auth.uid ||
+                   (resource.data.clientEmail != null && 
+                    request.auth.token.email == resource.data.clientEmail));
+
+      // Atualização/Exclusão:
+      // - Fotógrafo: pode atualizar/excluir qualquer campo
+      // - Cliente: só pode atualizar os campos da seleção
+      allow update: if request.auth != null && (
+        // Fotógrafo
+        resource.data.photographerId == request.auth.uid
+        // Cliente: apenas os campos de seleção
+        || (
+          resource.data.clientEmail != null &&
+          request.auth.token.email == resource.data.clientEmail &&
+          request.resource.data.diff(resource.data).changedKeys()
+            .hasOnly([
+              "selectedPhotos",
+              "selectionsSubmitted",
+              "submittedAt",
+              "submittedBy"
+            ])
+        )
+      );
+
+      allow delete: if request.auth != null && resource.data.photographerId == request.auth.uid;
+
+      // Subcoleção: photos
+      match /photos/{photoId} {
+        allow read: if request.auth != null && 
+                    (get(/databases/$(database)/documents/events/$(eventId)).data.photographerId == request.auth.uid ||
+                     (get(/databases/$(database)/documents/events/$(eventId)).data.clientEmail != null &&
+                      request.auth.token.email == get(/databases/$(database)/documents/events/$(eventId)).data.clientEmail));
+
+        allow create, delete: if request.auth != null &&
+                              get(/databases/$(database)/documents/events/$(eventId)).data.photographerId == request.auth.uid;
+
+        allow update: if request.auth != null &&
+                      get(/databases/$(database)/documents/events/$(eventId)).data.clientEmail == request.auth.token.email;
+      }
+
+      // Subcoleção: selections
+      match /selections/{selectionId} {
+        allow read, create, update: if request.auth != null && 
+                                    (get(/databases/$(database)/documents/events/$(eventId)).data.photographerId == request.auth.uid ||
+                                     (get(/databases/$(database)/documents/events/$(eventId)).data.clientEmail != null &&
+                                      request.auth.token.email == get(/databases/$(database)/documents/events/$(eventId)).data.clientEmail));
+
+        allow delete: if request.auth != null &&
+                      get(/databases/$(database)/documents/events/$(eventId)).data.photographerId == request.auth.uid;
+      }
+
+      // Subcoleção: messages (CHAT)
+      match /messages/{messageId} {
+        allow read: if request.auth != null && 
+                    (get(/databases/$(database)/documents/events/$(eventId)).data.photographerId == request.auth.uid ||
+                     (get(/databases/$(database)/documents/events/$(eventId)).data.clientEmail != null &&
+                      request.auth.token.email == get(/databases/$(database)/documents/events/$(eventId)).data.clientEmail));
+
+        allow create: if request.auth != null && 
+                      request.resource.data.senderId == request.auth.uid && 
+                      (get(/databases/$(database)/documents/events/$(eventId)).data.photographerId == request.auth.uid ||
+                       request.auth.token.email == get(/databases/$(database)/documents/events/$(eventId)).data.clientEmail);
+
+        allow update, delete: if false;
+      }
+    }
+
+    // Clientes do fotógrafo (se existir)
+    match /clients/{clientId} {
+      allow read, write, update, delete: if request.auth != null && 
+                                          resource.data.photographerId == request.auth.uid;
+    }
+  }
+}

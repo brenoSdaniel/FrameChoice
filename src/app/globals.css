@@ -1,0 +1,272 @@
+/* ================================================= */
+/* 🎨 TEMA GLOBAL — FRAMECHOICE */
+/* ================================================= */
+
+:root {
+  /* ============================= */
+  /* 🎯 CORES PRIMÁRIAS */
+  /* ============================= */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-soft: #dbeafe;
+
+  /* ============================= */
+  /* 🌿 CORES SECUNDÁRIAS */
+  /* ============================= */
+  --color-secondary: #16a34a;
+  --color-secondary-hover: #15803d;
+  --color-secondary-soft: #dcfce7;
+
+  /* ============================= */
+  /* 🚨 ESTADOS */
+  /* ============================= */
+  --color-danger: #dc2626;
+  --color-danger-soft: #fee2e2;
+
+  --color-warning: #f59e0b;
+  --color-warning-soft: #fef3c7;
+
+  --color-info: #0ea5e9;
+  --color-info-soft: #e0f2fe;
+
+  /* ============================= */
+  /* 🖤 NEUTROS */
+  /* ============================= */
+  --color-bg: #f5f6fa;
+  --color-card: #ffffff;
+
+  --color-text: #0f172a;
+  --color-text-light: #475569;
+  --color-muted: #64748b;
+
+  --color-border: #e2e8f0;
+
+  --success-bg: #dcfce7;
+  --success-text: #166534;
+
+  --error-bg: #fee2e2;
+  --error-text: #991b1b;
+
+  --warning-bg: #fef9c3;
+  --warning-text: #92400e;
+
+  --info-bg: #e0f2fe;
+  --info-text: #075985;
+
+  --color-bg: #0f1115;
+  --color-card: #151922;
+  --color-border: #262b36;
+  --color-text: #eaeaf0;
+  --color-text-muted: #9aa0aa;
+  --color-primary: #6d7cff;
+  --color-primary-soft: rgba(109, 124, 255, 0.15);
+
+  --radius-sm: 8px;
+  --radius-lg: 14px;
+
+
+
+  /* ============================= */
+  /* 🔤 TIPOGRAFIA */
+  /* ============================= */
+  --font-base: "Inter", Arial, Helvetica, sans-serif;
+
+  /* ============================= */
+  /* 📐 LAYOUT */
+  /* ============================= */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  /* ============================= */
+  /* 🌫️ SOMBRAS */
+  /* ============================= */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+  /* ============================= */
+  /* ⏱️ TRANSIÇÕES */
+  /* ============================= */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+}
+
+/* ================================================= */
+/* 🌙 DARK MODE AUTOMÁTICO */
+/* ================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #020617;
+    --color-card: #020617;
+
+    --color-text: #e5e7eb;
+    --color-text-light: #cbd5f5;
+    --color-muted: #94a3b8;
+
+    --color-border: #1e293b;
+  }
+}
+
+/* ================================================= */
+/* 🔧 RESET GLOBAL */
+/* ================================================= */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ================================================= */
+/* 🌍 BODY */
+/* ================================================= */
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================================================= */
+/* 🔗 LINKS */
+/* ================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ================================================= */
+/* 📝 FORMULÁRIOS (BASE GLOBAL) */
+/* ================================================= */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+label {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+input {
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-text);
+  outline: none;
+  transition: border var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+input::placeholder {
+  color: var(--color-muted);
+}
+
+input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ================================================= */
+/* 🔘 BOTÕES (BASE GLOBAL) */
+/* ================================================= */
+
+button {
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: none;
+  background: var(--color-primary);
+  color: #ffffff;
+  transition: background var(--transition-fast),
+              transform var(--transition-fast);
+}
+
+button:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* ================================================= */
+/* 🧩 VARIANTES DE BOTÃO */
+/* ================================================= */
+
+.button-secondary {
+  background: var(--color-secondary);
+}
+
+.button-secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.button-danger {
+  background: var(--color-danger);
+}
+
+.button-danger:hover {
+  opacity: 0.9;
+}
+
+/* ================================================= */
+/* 🧾 FEEDBACK VISUAL */
+/* ================================================= */
+
+.alert-success {
+  background: var(--color-secondary-soft);
+  color: var(--color-secondary);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+}
+
+.alert-error {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+}
+
+.alert-warning {
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+}
+
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+small {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
+}

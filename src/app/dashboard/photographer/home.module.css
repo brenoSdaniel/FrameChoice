@@ -1,0 +1,253 @@
+.dashboard {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #ffffff;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.header p {
+  font-size: 1.3rem;
+  color: #ffffff;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* TOP MÉTRICAS */
+.topMetrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 50px;
+}
+
+.topMetric {
+  text-align: center;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.topMetric span:first-child {
+  display: block;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.topMetric strong {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* MÉTRICAS (se tiver mais abaixo) */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-bottom: 60px;
+}
+
+.metricCard {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-8px);
+}
+
+.metricHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.metricIcon {
+  font-size: 2rem;
+  opacity: 0.9;
+}
+
+.metricTitle {
+  font-size: 1rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.metricValue {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1;
+}
+
+/* GRÁFICO */
+.chartSection {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 60px;
+}
+
+.chartSection h2 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 380px;
+}
+
+.emptyChart {
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.3rem;
+}
+
+/* AÇÕES */
+.actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.actionCard {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  transition: all 0.4s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.actionCard:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.iconCircle {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+}
+
+.icon {
+  font-size: 2.4rem;
+  color: white;
+}
+
+.actionContent h3 {
+  font-size: 1.5rem;
+  margin: 0 0 8px 0;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.actionContent p {
+  margin: 0;
+  color: #ffffff;
+  opacity: 0.9;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.actionArrow {
+  margin-left: auto;
+  font-size: 1.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.actionCard:hover .actionArrow {
+  transform: translateX(10px);
+  color: #a78bfa;
+}
+
+.loading {
+  text-align: center;
+  padding: 120px 20px;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .topMetrics, .actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 20px;
+  }
+
+  .header h1 {
+    font-size: 2.4rem;
+  }
+
+  .topMetrics {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 coluna */
+    gap: 24px;
+  }
+
+  /* Centraliza o terceiro card */
+  .topMetrics > .topMetric:nth-child(3) {
+    width: fit-content;      /* só o tamanho do conteúdo */
+    justify-self: center;    /* centraliza horizontalmente dentro da coluna */
+  }
+
+  .actions {
+    grid-template-columns: 1fr; /* mantém as ações empilhadas */
+  }
+}

@@ -1,0 +1,152 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 24px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  width: 100%;
+  max-width: 420px;
+  padding: 60px 48px; /* Maior no desktop */
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 48px;
+  font-size: 2.4rem; /* Maior */
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+/* ============================= */
+/* 📝 FORMULÁRIO */
+/* ============================= */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Mais espaço entre campos */
+}
+
+/* ============================= */
+/* 📝 INPUTS */
+/* ============================= */
+.form input {
+  padding: 22px 24px; /* Muito maior para toque fácil */
+  font-size: 1.2rem; /* Fonte maior */
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px; /* Mais arredondado */
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.form input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #a78bfa;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 5px rgba(167, 139, 250, 0.3);
+}
+
+/* ============================= */
+/* 🔘 BOTÃO PRINCIPAL */
+/* ============================= */
+.form button {
+  margin-top: 32px;
+  padding: 24px; /* Botão enorme */
+  font-size: 1.4rem; /* Texto grande */
+  font-weight: 700;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 15px 45px rgba(124, 58, 237, 0.5);
+}
+
+.form button:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(124, 58, 237, 0.6);
+}
+
+.form button:active {
+  transform: translateY(0);
+}
+
+/* ============================= */
+/* 📱 RESPONSIVIDADE — CELULAR E TABLET (MAIOR E MELHOR) */
+/* ============================= */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+    align-items: flex-start;
+    padding-top: 80px; /* Espaço para BackButton fixo */
+  }
+
+  .card {
+    max-width: 100%;
+    padding: 64px 40px; /* Ainda maior no celular */
+    border-radius: 32px;
+    margin: 0 16px;
+  }
+
+  .title {
+    font-size: 2.6rem; /* Título bem grande no celular */
+    margin-bottom: 56px;
+  }
+
+  .form {
+    gap: 36px; /* Mais espaço entre campos */
+  }
+
+  .form input {
+    padding: 24px 28px; /* Inputs gigantes para toque fácil */
+    font-size: 1.3rem;
+  }
+
+  .form input::placeholder {
+    font-size: 1.2rem;
+  }
+
+  .form button {
+    padding: 26px; /* Botão enorme */
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 56px 32px;
+    margin: 0;
+    border-radius: 28px;
+  }
+
+  .title {
+    font-size: 2.4rem;
+  }
+
+  .form input {
+    padding: 22px 24px;
+    font-size: 1.2rem;
+  }
+
+  .form button {
+    padding: 24px;
+    font-size: 1.4rem;
+  }
+}

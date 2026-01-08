@@ -1,0 +1,288 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 40px 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Seleção de evento */
+/* Seleção de evento — corrigido para tema escuro */
+.eventSelector {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  text-align: center;
+}
+
+.selectorLabel {
+  display: block;
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* Select principal */
+.selector {
+  width: 100%;
+  max-width: 600px;
+  padding: 18px 24px;
+  background: rgba(30, 30, 50, 0.8); /* Fundo escuro visível */
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  border-radius: 20px;
+  color: #ffffff; /* Texto branco */
+  font-size: 1.1rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a78bfa' d='M1.41 0L6 4.77 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 24px center;
+  background-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.selector:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.3);
+  background-color: rgba(40, 40, 60, 0.9);
+}
+
+/* As opções do dropdown (funciona na maioria dos navegadores modernos) */
+.selector option {
+  background: #1e1e2e; /* Fundo escuro para as opções */
+  color: #ffffff; /* Texto branco */
+  padding: 12px;
+}
+
+/* Para navegadores que não respeitam option styling, fallback com ::-webkit */
+.selector::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.selector::-ms-expand {
+  display: none;
+}
+/* Área de upload */
+.uploadArea {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  text-align: center;
+}
+
+.uploadBox {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 2px dashed rgba(167, 139, 250, 0.4);
+  border-radius: 24px;
+  padding: 60px 40px;
+  margin-bottom: 32px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.uploadBox:hover {
+  border-color: #a78bfa;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.fileInput {
+  display: none;
+}
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: #ffffff;
+}
+
+.uploadIcon {
+  font-size: 4rem;
+  opacity: 0.8;
+}
+
+.uploadLabel span:nth-child(2) {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.uploadHint {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.uploadButton {
+  padding: 18px 60px;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 12px 35px rgba(124, 58, 237, 0.4);
+  transition: all 0.4s ease;
+}
+
+.uploadButton:hover:not(:disabled) {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(124, 58, 237, 0.5);
+}
+
+.uploadButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.progressContainer {
+  margin: 40px 0;
+  text-align: center;
+}
+/* barra de progresso */
+.progressBar {
+  width: 100%;
+  max-width: 600px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 0 auto 16px auto;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #a78bfa, #7c3aed);
+  border-radius: 50px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.progressText {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.progressContainer {
+  margin: 50px 0;
+  text-align: center;
+}
+
+.progressBar {
+  width: 100%;
+  max-width: 600px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 0 auto 20px auto;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #a78bfa, #7c3aed);
+  border-radius: 50px;
+  width: 0%;
+  transition: width 0.6s ease;
+}
+
+.progressText {
+  font-size: 1.4rem;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.uploadTip {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 0.9; transform: translateY(0); }
+}
+
+/* Seções */
+.section {
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 32px;
+  font-weight: 600;
+}
+
+/* Grid de fotos */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.photoCard {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease;
+}
+
+.photoCard:hover {
+  transform: translateY(-10px);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.loading {
+  text-align: center;
+  padding: 120px 20px;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.empty {
+  text-align: center;
+  padding: 100px 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.4rem;
+}
