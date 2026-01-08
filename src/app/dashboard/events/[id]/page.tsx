@@ -28,7 +28,7 @@ export default function EventDetailsPageClient() {
 
     async function fetchEvent() {
       try {
-        // Forma correta e segura no Firebase modular
+        // Forma oficial do Firebase modular v9+
         const eventRef = doc(db, "events", eventId);
         const eventSnap = await getDoc(eventRef);
 
@@ -40,7 +40,7 @@ export default function EventDetailsPageClient() {
 
         const data = eventSnap.data();
 
-        // Subcoleção photos — forma correta
+        // Subcoleção photos — forma oficial
         const photosRef = collection(db, "events", eventId, "photos");
         const photosSnap = await getDocs(photosRef);
 
@@ -55,13 +55,13 @@ export default function EventDetailsPageClient() {
             day: "numeric",
             month: "short",
             year: "numeric",
-          }).replace(" de ", " "); // "15 jan 2026"
+          }).replace(" de ", " ");
         }
 
         setEvent({
           name: data.name || "Evento sem nome",
           client: data.clientEmail || data.client || "Cliente não informado",
-          maxSelections: data.maxSelections || 0,
+          maxSelections: data.maxSelections ?? 0,
           uploadedPhotos: photosSnap.size,
           deliveryDate: formattedDeliveryDate,
         });
